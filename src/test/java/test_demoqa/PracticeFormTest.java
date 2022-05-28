@@ -19,18 +19,23 @@ public class PracticeFormTest {
     @Test
     void successfulTest() {
 
-        open("/automation-practice-form");
+        open("/automation-practice-form"); // открываем сайт
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
 
-        $("[id=firstName]").setValue("Test");
-        $("[id=lastName]").setValue("Testov");
-        $("[id=userEmail]").setValue("test@test.com");
-        /*$("[id=gender-radio-1").click();*/
+        $("[id=firstName]").setValue("Test"); // ввод имени
+        $("[id=lastName]").setValue("Testov"); // ввод фамилии
+        $("[id=userEmail]").setValue("test@test.com"); // ввод email
+        $("#gender-radio-2").parent().click(); // выбор пола
+        $("[id=userNumber]").setValue("1234567890"); // ввод телефона
 
-        $("[id=userNumber]").setValue("1234567890");
+        $("[id=dateOfBirthInput]").click(); // выбор даты рождения
 
-        $("[id=currentAddress]").setValue("Test № 1");
+        $("#hobbies-checkbox-1").parent().click(); // checkbox "Sport"
+        $("#hobbies-checkbox-2").parent().click(); // checkbox "Reading"
+        $("#hobbies-checkbox-3").parent().click(); // checkbox "Music"
+
+        $("[id=currentAddress]").setValue("Test № 1"); // ввод адреса
 
         /*$("[id=currentAddress]").setValue("Some address 1");
         $("[id=permanentAddress]").setValue("Another address 2");
