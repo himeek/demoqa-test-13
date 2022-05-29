@@ -4,9 +4,12 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.byText;
 
 public class PracticeFormTest {
 
@@ -23,25 +26,46 @@ public class PracticeFormTest {
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
 
-        $("[id=firstName]").setValue("Test"); // ввод имени
-        $("[id=lastName]").setValue("Testov"); // ввод фамилии
-        $("[id=userEmail]").setValue("test@test.com"); // ввод email
-        $("#gender-radio-2").parent().click(); // выбор пола
-        $("[id=userNumber]").setValue("1234567890"); // ввод телефона
+        $("#firstName").setValue("Test"); // ввод имени
+        $("#lastName").setValue("Testov"); // ввод фамилии
+        $("#userEmail").setValue("test@test.com"); // ввод email
+        $("#genterWrapper").$(byText("Male")).click(); // выбор пола
+        $("#userNumber").setValue("1234567890"); // ввод телефона
 
-        $("[id=dateOfBirthInput]").click(); // выбор даты рождения
+        $("#dateOfBirthInput").click(); // открыть выпадающий список (календарь)
+        $(".react-datepicker__year-select").selectOption("1980"); // выбор года
+        $(".react-datepicker__month-select").selectOption("October"); // выбор месяца
+        $(".react-datepicker__day--015").click(); // выбор числа
+
+        $("#subjectsInput").sendKeys("E");
+        $(byText("English")).click(); // выбор предмета
+
+        $("#uploadPicture").uploadFile(new File("src/test/resources/text file")); // загрузка файла
 
         $("#hobbies-checkbox-1").parent().click(); // checkbox "Sport"
         $("#hobbies-checkbox-2").parent().click(); // checkbox "Reading"
         $("#hobbies-checkbox-3").parent().click(); // checkbox "Music"
 
-        $("[id=currentAddress]").setValue("Test № 1"); // ввод адреса
+        $("#currentAddress").setValue("Test adress 1"); // ввод адреса
 
-        /*$("[id=currentAddress]").setValue("Some address 1");
-        $("[id=permanentAddress]").setValue("Another address 2");
-        $("[id=submit]").click();
+        $("#state").click();
+        $(byText("NCR")).click(); //выбор штата
 
-        $("[id=output]").shouldHave(text("Alex"), text("alex@egorov.com"),
-                text("Some address 1"), text("Another address 2"));*/
+        $("#city").click();
+        $(byText("Delhi")).click(); // выбор города
+
+        $("#submit").click();
+
+        $(".modal-body").shouldHave(
+                text("Test Testov"),
+                text("test@test.com"),
+                text("Male"),
+                text("1234567890"),
+                text("15 October,1980"),
+                text("English"),
+                text("Sports, Reading, Music"),
+                text("text file"),
+                text("Test adress 1"),
+                text("NCR Delhi"));
     }
 }
