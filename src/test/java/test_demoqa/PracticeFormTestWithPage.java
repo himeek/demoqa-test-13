@@ -6,7 +6,6 @@ public class PracticeFormTestWithPage extends TestBase {
 
     @Test
     void successfulTest() {
-
         String firstName = "Test";
         String lastName = "Testov";
         String userEmail = "test@test.com";
@@ -16,7 +15,7 @@ public class PracticeFormTestWithPage extends TestBase {
         String monthOfBirth = "October";
         String yearOfBirth = "1980";
         String subject = "English";
-        String fileNamePath = "img/avatar.png";
+        String fileNamePath = "avatar.png";
         String fileName = "avatar.png";
         String hobbie = "Music";
         String currentAddress = "Test adress 1";

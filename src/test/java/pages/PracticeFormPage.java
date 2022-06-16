@@ -77,8 +77,8 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage setSubjects(String value) {
-        subjectsInput.sendKeys("E");
-        $(byText(value)).click();
+        subjectsInput.sendKeys(value);
+        subjectsInput.pressEnter();
 
         return this;
     }
